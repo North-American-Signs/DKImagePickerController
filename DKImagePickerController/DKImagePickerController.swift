@@ -416,6 +416,9 @@ open class DKImagePickerController : UINavigationController {
     }
 
     private func createCameraAlbum() {
+        if fetchAlbumAssetCollection() != nil {
+            return
+        }
         if let albumName = self.cameraAlbumName {
             PHPhotoLibrary.shared().performChanges({
                 PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
