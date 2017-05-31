@@ -53,6 +53,13 @@ class DKImagePickerControllerDemoVC: UITableViewController {
             
             destination.pickerController = pickerController
             
+        case "Custom Album":
+            let pickerController = DKImagePickerController()
+            pickerController.sourceType = .camera
+            pickerController.cameraAlbumName = "DKImagePickerAlbum"
+            
+            destination.pickerController = pickerController
+            
         case "Allows Landscape":
             let pickerController = DKImagePickerController()
             pickerController.allowsLandscape = true
