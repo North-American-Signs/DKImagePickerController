@@ -145,6 +145,13 @@ open class DKImagePickerController : UINavigationController {
             getImageManager().groupDataManager.assetGroupTypes = newTypes
         }
     }
+
+    /// The name of the album where to store images captured with the camera
+    public var cameraAlbumName: String? = nil {
+        didSet {
+            self.createCameraAlbum()
+        }
+    }
     
     /// Set the showsEmptyAlbums to specify whether or not the empty albums is shown in the picker.
     public var showsEmptyAlbums = true {
@@ -354,6 +361,7 @@ open class DKImagePickerController : UINavigationController {
 
             PHPhotoLibrary.shared().performChanges({
                 let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+                self.saveToCameraAlbum(assetRequest)
                 newImageIdentifier = assetRequest.placeholderForCreatedAsset!.localIdentifier
             }) { [weak self] (success, error) in
                 DispatchQueue.main.async(execute: { [weak self] in
@@ -379,6 +387,7 @@ open class DKImagePickerController : UINavigationController {
             var newVideoIdentifier: String!
             PHPhotoLibrary.shared().performChanges({
                 let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)
+                self.saveToCameraAlbum(assetRequest)
                 newVideoIdentifier = assetRequest?.placeholderForCreatedAsset?.localIdentifier
             }) { (success, error) in
                 DispatchQueue.main.async(execute: {
@@ -405,7 +414,40 @@ open class DKImagePickerController : UINavigationController {
         
         return camera
     }
-    
+
+    private func createCameraAlbum() {
+        if let albumName = self.cameraAlbumName {
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
+            }) { success, error in
+                if !success {
+                    print("Album creation error: \(String(describing: error))")
+                }
+            }
+        }
+    }
+
+    private func fetchAlbumAssetCollection() -> PHAssetCollection? {
+        if let albumName = self.cameraAlbumName {
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
+            let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+            return collection.firstObject
+        }
+        return nil
+    }
+
+    /// Saves this PHAssetChangeRequest to the custom album defined by albumName.
+    /// This needs to be called within PHPhotoLibrary.performChanges()
+    private func saveToCameraAlbum(_ request: PHAssetChangeRequest?) {
+        guard let request = request else { return }
+        if let collection = self.fetchAlbumAssetCollection() {
+            let placeHolder = request.placeholderForCreatedAsset!
+            let albumChangeRequest = PHAssetCollectionChangeRequest(for: collection)
+            albumChangeRequest?.addAssets([placeHolder] as NSArray)
+        }
+    }
+
     internal func presentCamera() {
         self.present(self.createCamera(), animated: true, completion: nil)
     }
