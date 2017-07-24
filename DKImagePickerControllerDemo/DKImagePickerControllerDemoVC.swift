@@ -69,6 +69,7 @@ class DKImagePickerControllerDemoVC: UITableViewController {
         case "Single Select":
             let pickerController = DKImagePickerController()
             pickerController.singleSelect = true
+            pickerController.autoCloseOnSingleSelect = true
             
             destination.pickerController = pickerController
             

@@ -123,8 +123,11 @@ open class DKImagePickerController : UINavigationController {
         return DKImagePickerControllerDefaultUIDelegate()
     }()
     
-    /// Forces selection of tapped image immediatly.
+    /// Forces deselect of previous selected image
     public var singleSelect = false
+    
+    /// Auto close picker on single select
+    public var autoCloseOnSingleSelect = true
     
     /// The maximum count of assets which the user will be able to select.
     public var maxSelectableCount = 999
@@ -210,7 +213,7 @@ open class DKImagePickerController : UINavigationController {
     public var didCancel: (() -> Void)?
     public var showsCancelButton = false {
         didSet {
-            if let rootVC =  self.viewControllers.first {
+            if let rootVC = self.viewControllers.first {
                 self.updateCancelButtonForVC(rootVC)
             }
         }
@@ -276,7 +279,7 @@ open class DKImagePickerController : UINavigationController {
                 }
             } else {
                 self.isNavigationBarHidden = false
-                let rootVC = DKAssetGroupDetailVC()
+                let rootVC = self.makeRootVC()
                 rootVC.imagePickerController = self
                 
                 self.UIDelegate.prepareLayout(self, vc: rootVC)
@@ -293,6 +296,10 @@ open class DKImagePickerController : UINavigationController {
         let assetFetchOptions = PHFetchOptions()
         return assetFetchOptions
     }()
+  
+    open func makeRootVC() -> DKAssetGroupDetailVC {
+      return DKAssetGroupDetailVC()
+    }
     
     private func createAssetFetchOptions() -> PHFetchOptions? {
         let createImagePredicate = { () -> NSPredicate in
@@ -356,20 +363,20 @@ open class DKImagePickerController : UINavigationController {
                 let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
                 self.saveToCameraAlbum(assetRequest)
                 newImageIdentifier = assetRequest.placeholderForCreatedAsset!.localIdentifier
-            }) { (success, error) in
-                DispatchQueue.main.async(execute: {
+            }) { [weak self] (success, error) in
+                DispatchQueue.main.async(execute: { [weak self] in
                     if success {
                         if let newAsset = PHAsset.fetchAssets(withLocalIdentifiers: [newImageIdentifier], options: nil).firstObject {
-                            if self.presentedViewController != nil {
-                                self.dismiss(animated: true, completion: nil)
+                            if self?.presentedViewController != nil {
+                                self?.dismiss(animated: true, completion: nil)
                             }
-                            self.selectImage(DKAsset(originalAsset: newAsset))
+                            self?.selectImage(DKAsset(originalAsset: newAsset))
                         }
                     } else {
-                        if self.sourceType != .camera {
-                            self.dismiss(animated: true, completion: nil)
+                        if self?.sourceType != .camera {
+                            self?.dismiss(animated: true, completion: nil)
                         }
-                        self.selectImage(DKAsset(image: image))
+                        self?.selectImage(DKAsset(image: image))
                     }
                 })
                 
@@ -493,7 +500,9 @@ open class DKImagePickerController : UINavigationController {
         if self.singleSelect {
             self.deselectAllAssets()
             self.selectedAssets.append(asset)
-            self.done()
+            if autoCloseOnSingleSelect {
+                self.done()
+            }
         } else {
             self.selectedAssets.append(asset)
             if self.sourceType == .camera {
