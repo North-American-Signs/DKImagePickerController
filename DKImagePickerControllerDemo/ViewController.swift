@@ -19,24 +19,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
 	func showImagePicker() {
 		pickerController.defaultSelectedAssets = self.assets
-		
+        
         pickerController.didCancel = { ()
             print("didCancel")
         }
         
 		pickerController.didSelectAssets = { [unowned self] (assets: [DKAsset]) in
-			print("didSelectAssets")
-			
-			self.assets = assets
-			self.previewView?.reloadData()
+            self.updateAssets(assets: assets)
 		}
 		
 		if UI_USER_INTERFACE_IDIOM() == .pad {
 			pickerController.modalPresentationStyle = .formSheet
 		}
 		
-		self.present(pickerController, animated: true) {}
+        // turn on the swipe selection feature
+        // self.pickerController.allowSwipeToSelect = true
+		
+        if pickerController.inline {
+            self.showInlinePicker()
+        } else {
+            self.present(pickerController, animated: true) {}
+        }
 	}
+    
+    func updateAssets(assets: [DKAsset]) {
+        print("didSelectAssets")
+        
+        self.assets = assets
+        self.previewView?.reloadData()
+    }
 	
     func playVideo(_ asset: AVAsset) {
 		let avPlayerItem = AVPlayerItem(asset: asset)
@@ -115,5 +126,52 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 			})
 		}
     }
+    
+    // Inline Mode
+    
+    func showInlinePicker() {
+        let pickerView = self.pickerController.view!
+        pickerView.frame = CGRect(x: 0, y: 170, width: self.view.bounds.width, height: 200)
+        self.view.addSubview(pickerView)
+        
+        let doneButton = UIButton(type: .custom)
+        doneButton.setTitleColor(UIColor.blue, for: .normal)
+        doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
+        doneButton.frame = CGRect(x: 0, y: pickerView.frame.maxY, width: pickerView.bounds.width / 2, height: 50)
+        self.view.addSubview(doneButton)
+        self.pickerController.selectedChanged = { [unowned self] in
+            self.updateDoneButtonTitle(doneButton)
+        }
+        self.updateDoneButtonTitle(doneButton)
+        
+        let albumButton = UIButton(type: .custom)
+        albumButton.setTitleColor(UIColor.blue, for: .normal)
+        albumButton.setTitle("Album", for: .normal)
+        albumButton.addTarget(self, action: #selector(showAlbum), for: .touchUpInside)
+        albumButton.frame = CGRect(x: doneButton.frame.maxX, y: doneButton.frame.minY, width: doneButton.bounds.width, height: doneButton.bounds.height)
+        self.view.addSubview(albumButton)
+    }
+    
+    func updateDoneButtonTitle(_ doneButton: UIButton) {
+        doneButton.setTitle("Done(\(self.pickerController.selectedAssets.count))", for: .normal)
+    }
+    
+    @objc
+    func done() {
+        self.updateAssets(assets: self.pickerController.selectedAssets)
+    }
+    
+    @objc
+    func showAlbum() {
+        let pickerController = DKImagePickerController()
+        pickerController.defaultSelectedAssets = self.pickerController.selectedAssets
+        pickerController.didSelectAssets = { [unowned self] (assets: [DKAsset]) in
+            self.updateAssets(assets: assets)
+            self.pickerController.defaultSelectedAssets = assets
+        }
+        
+        self.present(pickerController, animated: true, completion: nil)
+    }
+
 }
 

@@ -165,6 +165,7 @@ public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
         let collection = PHAssetCollection.transientAssetCollection(with: filtered, title: nil)
         return PHAsset.fetchAssets(in: collection, options: nil)
     }
+    
 	// MARK: - PHPhotoLibraryChangeObserver methods
 	
 	public func photoLibraryDidChange(_ changeInstance: PHChange) {
@@ -176,7 +177,7 @@ public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
 					continue
 				}
 				
-				if let objectAfterChanges = changeDetails.objectAfterChanges as? PHAssetCollection {
+                if let objectAfterChanges = changeDetails.objectAfterChanges {
 					self.updateGroup(self.groups![group.groupId]!, collection: objectAfterChanges)
 					self.notifyObserversWithSelector(#selector(DKGroupDataManagerObserver.groupDidUpdate(_:)), object: group.groupId as AnyObject?)
 				}
