@@ -470,6 +470,7 @@ open class DKImagePickerController : UINavigationController {
         }
     }
     
+    @objc
     open func dismiss() {
         self.presentingViewController?.dismiss(animated: true, completion: {
             self.didCancel?()

@@ -276,7 +276,7 @@ open class DKCamera: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         // cancel button
         let cancelButton: UIButton = {
             let cancelButton = UIButton()
-            cancelButton.addTarget(self, action: #selector(dismiss as (Void) -> Void), for: .touchUpInside)
+            cancelButton.addTarget(self, action: #selector(dismiss as () -> Void), for: .touchUpInside)
             cancelButton.setImage(cameraResource.cameraCancelImage(), for: .normal)
             cancelButton.sizeToFit()
             
@@ -564,13 +564,13 @@ open class DKCamera: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     open func updateFlashButton() {
         struct FlashImage {
-            let images: [AVCaptureFlashMode: UIImage]
+            let images: [AVCaptureDevice.FlashMode: UIImage]
 
             init(cameraResource: DKCameraResource) {
                 self.images = [
-                    AVCaptureFlashMode.auto : cameraResource.cameraFlashAutoImage(),
-                    AVCaptureFlashMode.on : cameraResource.cameraFlashOnImage(),
-                    AVCaptureFlashMode.off : cameraResource.cameraFlashOffImage()
+                    AVCaptureDevice.FlashMode.auto : cameraResource.cameraFlashAutoImage(),
+                    AVCaptureDevice.FlashMode.on : cameraResource.cameraFlashOnImage(),
+                    AVCaptureDevice.FlashMode.off : cameraResource.cameraFlashOffImage()
                 ]
             }
 

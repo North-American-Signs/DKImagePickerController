@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B9EFB9621D20FB7D006CDCAA"
-               BuildableName = "DKImagePickerController.framework"
-               BlueprintName = "DKImagePickerController"
+               BlueprintIdentifier = "9C35CBFE19DBB00700557269"
+               BuildableName = "DKImagePickerControllerDemo.app"
+               BlueprintName = "DKImagePickerControllerDemo"
                ReferencedContainer = "container:DKImagePickerControllerDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,6 +44,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9C35CBFE19DBB00700557269"
+            BuildableName = "DKImagePickerControllerDemo.app"
+            BlueprintName = "DKImagePickerControllerDemo"
+            ReferencedContainer = "container:DKImagePickerControllerDemo.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
