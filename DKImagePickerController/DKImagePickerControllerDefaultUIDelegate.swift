@@ -42,6 +42,21 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
         }
         
         button.sizeToFit()
+        
+        if #available(iOS 11.0, *) { // Handle iOS 11 BarButtonItems bug
+            if button.constraints.count == 0 {
+                button.widthAnchor.constraint(equalToConstant: button.bounds.width).isActive = true
+                button.heightAnchor.constraint(equalToConstant: button.bounds.height).isActive = true
+            } else {
+                for constraint in button.constraints {
+                    if constraint.firstAttribute == .width {
+                        constraint.constant = button.bounds.width
+                    } else if constraint.firstAttribute == .height {
+                        constraint.constant = button.bounds.height
+                    }
+                }
+            }
+        }
     }
 	
 	// Delegate methods...
@@ -148,7 +163,7 @@ open class DKImagePickerControllerCamera: DKCamera, DKImagePickerControllerCamer
         
     }
 
-    open func setDidFinishCapturingImage(block: @escaping (UIImage?, Data?) -> Void) {
+    open func setDidFinishCapturingImage(block: @escaping (UIImage, [AnyHashable : Any]?) -> Void) {
         super.didFinishCapturingImage = block
     }
 

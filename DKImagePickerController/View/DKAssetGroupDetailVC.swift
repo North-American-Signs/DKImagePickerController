@@ -30,13 +30,13 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
     public lazy var selectGroupButton: UIButton = {
         let button = UIButton()
 
-        let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.foregroundColor] as? UIColor
-        button.setTitleColor(globalTitleColor ?? UIColor.black, for: .normal)
+		let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.foregroundColor] as? UIColor
+		button.setTitleColor(globalTitleColor ?? UIColor.black, for: .normal)
 
-        let globalTitleFont = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.font] as? UIFont
-        button.titleLabel!.font = globalTitleFont ?? UIFont.boldSystemFont(ofSize: 18.0)
+		let globalTitleFont = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.font] as? UIFont
+		button.titleLabel!.font = globalTitleFont ?? UIFont.boldSystemFont(ofSize: 18.0)
 
-        button.addTarget(self, action: #selector(DKAssetGroupDetailVC.showGroupSelector), for: .touchUpInside)
+		button.addTarget(self, action: #selector(DKAssetGroupDetailVC.showGroupSelector), for: .touchUpInside)
         return button
     }()
 
@@ -53,7 +53,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
 
 	override open func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
-		
+
 		if let currentViewSize = self.currentViewSize, currentViewSize.equalTo(self.view.bounds.size) {
 			return
 		} else {
@@ -62,7 +62,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
 
         self.collectionView?.collectionViewLayout.invalidateLayout()
     }
-    
+
     override open func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,12 +73,12 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
 		self.collectionView.delegate = self
 		self.collectionView.dataSource = self
 		self.view.addSubview(self.collectionView)
-		
+
 		self.footerView = self.imagePickerController.UIDelegate.imagePickerControllerFooterView(self.imagePickerController)
 		if let footerView = self.footerView {
 			self.view.addSubview(footerView)
 		}
-		
+
 		self.hidesCamera = self.imagePickerController.sourceType == .photo
 		self.checkPhotoPermission()
 
@@ -132,7 +132,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
             self.updateTitleView()
             return
         }
-        
+
         self.selectedGroupId = groupId
         self.updateTitleView()
         self.collectionView!.reloadData()
@@ -161,20 +161,20 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
 	open func updateTitleView() {
 		let group = getImageManager().groupDataManager.fetchGroupWithGroupId(self.selectedGroupId!)
 		self.title = group.groupName
-		
+
 		let groupsCount = getImageManager().groupDataManager.groupIds?.count ?? 0
 		self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? "  \u{25be}" : "" ), for: .normal)
 		self.selectGroupButton.sizeToFit()
 		self.selectGroupButton.isEnabled = groupsCount > 1
-		
+
 		self.navigationItem.titleView = self.selectGroupButton
 	}
-    
+
     @objc
     func showGroupSelector() {
         DKPopoverViewController.popoverViewController(self.groupListVC, fromView: self.selectGroupButton)
     }
-    
+
     func fetchAsset(for index: Int) -> DKAsset? {
         if !self.hidesCamera && index == 0 {
             return nil
@@ -183,7 +183,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
         let group = getImageManager().groupDataManager.fetchGroupWithGroupId(self.selectedGroupId!)
         return getImageManager().groupDataManager.fetchAsset(group, index: assetIndex)
     }
-    
+
     //select an asset at a specific index
     public func selectAsset(atIndex indexPath: IndexPath) {
         let selectedAsset = (collectionView.cellForItem(at: indexPath) as? DKAssetGroupDetailBaseCell)
@@ -249,7 +249,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
         if self.thumbnailSize.equalTo(CGSize.zero) {
             self.thumbnailSize = self.collectionView!.collectionViewLayout.layoutAttributesForItem(at: indexPath)!.size.toPixel()
         }
-        
+
         asset.fetchImageWithSize(self.thumbnailSize, options: nil, contentMode: .aspectFill) { (image, info) in
             if cell.tag == tag {
                 cell.thumbnailImage = image
@@ -270,7 +270,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		guard let selectedGroupId = self.selectedGroupId else { return 0 }
-		
+
 		let group = getImageManager().groupDataManager.fetchGroupWithGroupId(selectedGroupId)
 
         var totalCount = 0
@@ -281,7 +281,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
         }
         return totalCount + (self.hidesCamera ? 0 : 1)
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: DKAssetGroupDetailBaseCell!
         if self.isCameraCell(indexPath: indexPath) {
@@ -289,10 +289,9 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
         } else {
             cell = self.dequeueReusableCell(for: indexPath)
         }
-        
         return cell
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if let firstSelectedAsset = self.imagePickerController.selectedAssets.first,
             let selectedAsset = (collectionView.cellForItem(at: indexPath) as? DKAssetGroupDetailBaseCell)?.asset, self.imagePickerController.allowMultipleTypes == false && firstSelectedAsset.isVideo != selectedAsset.isVideo {
@@ -365,16 +364,16 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
     func updateCachedAssets() {
         // Update only if the view is visible.
         guard isViewLoaded && view.window != nil && self.selectedGroupId != nil else { return }
-        
+
         // The preheat window is twice the height of the visible rect.
         let preheatRect = view!.bounds.insetBy(dx: 0, dy: -0.5 * view!.bounds.height)
-        
+
         // Update only if the visible area is significantly different from the last preheated area.
         let delta = abs(preheatRect.midY - self.previousPreheatRect.midY)
         guard delta > view.bounds.height / 3 else { return }
-        
+
         let group = getImageManager().groupDataManager.fetchGroupWithGroupId(self.selectedGroupId!)
-        
+
         // Compute the assets to start caching and to stop caching.
         let (addedRects, removedRects) = self.differencesBetweenRects(self.previousPreheatRect, preheatRect)
         let addedAssets = addedRects
@@ -383,17 +382,17 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
         let removedAssets = removedRects
             .flatMap { rect in self.collectionView!.indexPathsForElements(in: rect, self.hidesCamera) }
             .map { indexPath in getImageManager().groupDataManager.fetchOriginalAsset(group, index: indexPath.item) }
-        
+
         // Update the assets the PHCachingImageManager is caching.
         getImageManager().startCachingAssets(for: addedAssets,
                                              targetSize: self.thumbnailSize, contentMode: .aspectFill, options: nil)
         getImageManager().stopCachingAssets(for: removedAssets,
                                             targetSize: self.thumbnailSize, contentMode: .aspectFill, options: nil)
-        
+
         // Store the preheat rect to compare against in the future.
         self.previousPreheatRect = preheatRect
     }
-    
+
     fileprivate func differencesBetweenRects(_ old: CGRect, _ new: CGRect) -> (added: [CGRect], removed: [CGRect]) {
         if old.intersects(new) {
             var added = [CGRect]()
@@ -437,7 +436,7 @@ open class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, UIC
             }
         }
     }
-    
+
     func groupDidUpdateComplete(_ groupId: String) {
         if self.selectedGroupId == groupId {
             self.resetCachedAssets()
