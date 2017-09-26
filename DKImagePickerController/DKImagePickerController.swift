@@ -409,6 +409,7 @@ open class DKImagePickerController : UINavigationController {
     
     @objc open func presentCamera() {
         self.present(camera: self.createCamera())
+    }
 
     private func createCameraAlbum() {
         if fetchAlbumAssetCollection() != nil {
