@@ -391,10 +391,11 @@ open class DKCamera: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             for oldInput in self.captureSession.inputs {
                 self.captureSession.removeInput(oldInput)
             }
-
-            let frontInput = try? AVCaptureDeviceInput(device: self.currentDevice!)
-            if self.captureSession.canAddInput(frontInput!) {
-                self.captureSession.addInput(frontInput!)
+            
+            if let frontInput = try? AVCaptureDeviceInput(device: self.currentDevice!) {
+                if self.captureSession.canAddInput(frontInput) {
+                    self.captureSession.addInput(frontInput)
+                }
             }
 
             try! currentDevice.lockForConfiguration()
