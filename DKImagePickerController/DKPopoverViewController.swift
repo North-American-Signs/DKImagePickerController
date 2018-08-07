@@ -138,7 +138,7 @@ open class DKPopoverViewController: UIViewController {
         
 
         preferredContentSizeObserver = self.contentViewController.observe(\.preferredContentSize, options: .new, changeHandler: { [weak self] (vc, changes) in
-            if let newValue = changes.newValue {
+            if changes.newValue != nil {
                 self?.animatePopoverViewAfterChange()
             }
         })
