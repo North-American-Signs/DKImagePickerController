@@ -142,7 +142,7 @@ open class DKImagePickerController: UINavigationController, DKImageBaseManagerOb
     /// The name of the album where to store images captured with the camera
     public var cameraAlbumName: String? = nil {
         didSet {
-            self.createCameraAlbum()
+            self.setupCameraAlbum()
         }
     }
     
@@ -324,38 +324,41 @@ open class DKImagePickerController: UINavigationController, DKImageBaseManagerOb
         }
     }
 
+    private func setupCameraAlbum() {
+        guard getCameraAlbumCollection() == nil else { return }
+
+        createCameraAlbum()
+    }
+
     private func createCameraAlbum() {
-        guard fetchAlbumAssetCollection() == nil else { return }
-        if let albumName = self.cameraAlbumName {
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
-            }) { success, error in
-                if !success {
-                    print("Album creation error: \(String(describing: error))")
-                }
+        guard let albumName = self.cameraAlbumName else { return }
+
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
+        }) { success, error in
+            if !success {
+                print("Album creation error: \(String(describing: error))")
             }
         }
     }
 
-    private func fetchAlbumAssetCollection() -> PHAssetCollection? {
-        if let albumName = self.cameraAlbumName {
-            let fetchOptions = PHFetchOptions()
-            fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
-            let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
-            return collection.firstObject
-        }
-        return nil
+    private func getCameraAlbumCollection() -> PHAssetCollection? {
+        guard let albumName = self.cameraAlbumName else { return nil }
+
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
+        let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        return collection.firstObject
     }
 
     /// Saves this PHAssetChangeRequest to the custom album defined by albumName.
     /// This needs to be called within PHPhotoLibrary.performChanges()
     private func saveToCameraAlbum(_ request: PHAssetChangeRequest?) {
-        guard let request = request else { return }
-        if let collection = self.fetchAlbumAssetCollection() {
-            let placeHolder = request.placeholderForCreatedAsset!
-            let albumChangeRequest = PHAssetCollectionChangeRequest(for: collection)
-            albumChangeRequest?.addAssets([placeHolder] as NSArray)
-        }
+        guard let request = request, let collection = self.getCameraAlbumCollection() else { return }
+
+        let placeHolder = request.placeholderForCreatedAsset!
+        let albumChangeRequest = PHAssetCollectionChangeRequest(for: collection)
+        albumChangeRequest?.addAssets([placeHolder] as NSArray)
     }
     
     private func cancelCurrentExportRequestIfNeeded() {
