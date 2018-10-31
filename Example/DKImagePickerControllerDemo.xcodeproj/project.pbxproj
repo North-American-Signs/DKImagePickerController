@@ -54,14 +54,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0BCDF3E35114F29DBA9349D9 /* Pods-DKImagePickerControllerDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemoTests/Pods-DKImagePickerControllerDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		0FE9C7BC2711961981C4A465 /* Pods-DKImagePickerController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerController/Pods-DKImagePickerController.debug.xcconfig"; sourceTree = "<group>"; };
-		1CADE99D9E3901676B8541D8 /* Pods-DKImagePickerControllerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemo/Pods-DKImagePickerControllerDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		13CB1CA52ABAE8BD5974FD41 /* Pods-DKImagePickerControllerDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemoTests/Pods-DKImagePickerControllerDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		4169E42776FABA4ABC9472C3 /* Pods-DKImagePickerControllerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerTests/Pods-DKImagePickerControllerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		471FB862F29026AB44853E25 /* Pods-DKImagePickerControllerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerTests/Pods-DKImagePickerControllerTests.release.xcconfig"; sourceTree = "<group>"; };
 		5AB9AC40355E81A483CA752D /* Pods_DKImagePickerControllerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DKImagePickerControllerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72A8D899FC4B155B7F61790B /* Pods_DKImagePickerControllerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DKImagePickerControllerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		863E76DAED9D96AC04D9D638 /* Pods-DKImagePickerController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerController.release.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerController/Pods-DKImagePickerController.release.xcconfig"; sourceTree = "<group>"; };
+		867EE6CEFF488B704109C09F /* Pods-DKImagePickerControllerDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemoTests/Pods-DKImagePickerControllerDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9765D1C3C60DEB1AAE38A124 /* Pods-DKImagePickerControllerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemo/Pods-DKImagePickerControllerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		9C35CBFF19DBB00700557269 /* DKImagePickerControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKImagePickerControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C6E94B01F5E65800014B700 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C6E94B21F5E65800014B700 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -86,10 +87,9 @@
 		9CF72B141B8F073400238B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CF72B151B8F073400238B9A /* DKImagePickerControllerDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DKImagePickerControllerDemoTests.swift; sourceTree = "<group>"; };
 		B9EFB9931D2105A3006CDCAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		DAD0C79E380771858014F6FF /* Pods-DKImagePickerControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemo/Pods-DKImagePickerControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		DE46B9A1E582111C8A12DB00 /* Pods-DKImagePickerControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemo/Pods-DKImagePickerControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
 		DEA2D9AC87F0FE66B93C2B0A /* Pods_DKImagePickerControllerDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DKImagePickerControllerDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E112479E248DE8D49995AB6B /* Pods_DKImagePickerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DKImagePickerController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F840B5B530FE126DAB8B4EE3 /* Pods-DKImagePickerControllerDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKImagePickerControllerDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DKImagePickerControllerDemoTests/Pods-DKImagePickerControllerDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,12 +118,12 @@
 			children = (
 				0FE9C7BC2711961981C4A465 /* Pods-DKImagePickerController.debug.xcconfig */,
 				863E76DAED9D96AC04D9D638 /* Pods-DKImagePickerController.release.xcconfig */,
-				1CADE99D9E3901676B8541D8 /* Pods-DKImagePickerControllerDemo.debug.xcconfig */,
-				DAD0C79E380771858014F6FF /* Pods-DKImagePickerControllerDemo.release.xcconfig */,
-				F840B5B530FE126DAB8B4EE3 /* Pods-DKImagePickerControllerDemoTests.debug.xcconfig */,
-				0BCDF3E35114F29DBA9349D9 /* Pods-DKImagePickerControllerDemoTests.release.xcconfig */,
 				4169E42776FABA4ABC9472C3 /* Pods-DKImagePickerControllerTests.debug.xcconfig */,
 				471FB862F29026AB44853E25 /* Pods-DKImagePickerControllerTests.release.xcconfig */,
+				9765D1C3C60DEB1AAE38A124 /* Pods-DKImagePickerControllerDemo.debug.xcconfig */,
+				DE46B9A1E582111C8A12DB00 /* Pods-DKImagePickerControllerDemo.release.xcconfig */,
+				867EE6CEFF488B704109C09F /* Pods-DKImagePickerControllerDemoTests.debug.xcconfig */,
+				13CB1CA52ABAE8BD5974FD41 /* Pods-DKImagePickerControllerDemoTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -285,12 +285,12 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = ZhangAo;
 				TargetAttributes = {
 					9C35CBFE19DBB00700557269 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 85M74MVK78;
+						DevelopmentTeam = 5BQ6N8PN82;
 						LastSwiftMigration = 0800;
 					};
 					9CF72B101B8F073400238B9A = {
@@ -495,12 +495,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -549,12 +551,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -585,14 +589,14 @@
 		};
 		9C35CC1F19DBB00700557269 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CADE99D9E3901676B8541D8 /* Pods-DKImagePickerControllerDemo.debug.xcconfig */;
+			baseConfigurationReference = 9765D1C3C60DEB1AAE38A124 /* Pods-DKImagePickerControllerDemo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 85M74MVK78;
+				DEVELOPMENT_TEAM = 5BQ6N8PN82;
 				INFOPLIST_FILE = DKImagePickerControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -607,14 +611,14 @@
 		};
 		9C35CC2019DBB00700557269 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAD0C79E380771858014F6FF /* Pods-DKImagePickerControllerDemo.release.xcconfig */;
+			baseConfigurationReference = DE46B9A1E582111C8A12DB00 /* Pods-DKImagePickerControllerDemo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 85M74MVK78;
+				DEVELOPMENT_TEAM = 5BQ6N8PN82;
 				INFOPLIST_FILE = DKImagePickerControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -629,7 +633,7 @@
 		};
 		9CF72B191B8F073400238B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F840B5B530FE126DAB8B4EE3 /* Pods-DKImagePickerControllerDemoTests.debug.xcconfig */;
+			baseConfigurationReference = 867EE6CEFF488B704109C09F /* Pods-DKImagePickerControllerDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -651,7 +655,7 @@
 		};
 		9CF72B1A1B8F073400238B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BCDF3E35114F29DBA9349D9 /* Pods-DKImagePickerControllerDemoTests.release.xcconfig */;
+			baseConfigurationReference = 13CB1CA52ABAE8BD5974FD41 /* Pods-DKImagePickerControllerDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;

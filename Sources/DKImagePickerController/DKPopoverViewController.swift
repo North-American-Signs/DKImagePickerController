@@ -109,10 +109,6 @@ open class DKPopoverViewController: UIViewController {
     // MARK: - Observers
 
     private var preferredContentSizeObserver: NSKeyValueObservation?
-    
-    // MARK: - Observers
-
-    private var preferredContentSizeObserver: NSKeyValueObservation?
 
     override open func loadView() {
         super.loadView()
