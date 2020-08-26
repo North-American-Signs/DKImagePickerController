@@ -9,11 +9,11 @@
 import UIKit
 import Foundation
 
-#if canImport(TOCropViewController)
-import TOCropViewController
+#if canImport(CropViewController)
+import CropViewController
 #endif
 
-open class DKImageExtensionPhotoCropper: DKImageBaseExtension, TOCropViewControllerDelegate {
+open class DKImageExtensionPhotoCropper: DKImageBaseExtension {
     
     open  weak var imageEditor: UIViewController?
     open  var metadata: [AnyHashable : Any]?
@@ -24,36 +24,38 @@ open class DKImageExtensionPhotoCropper: DKImageBaseExtension, TOCropViewControl
     }
         
     override open func perform(with extraInfo: [AnyHashable: Any]) {
-        guard let image = extraInfo["image"] as? UIImage
+        guard let sourceImage = extraInfo["image"] as? UIImage
             , let didFinishEditing = extraInfo["didFinishEditing"] as? ((UIImage, [AnyHashable : Any]?) -> Void) else { return }
         
         self.metadata = extraInfo["metadata"] as? [AnyHashable : Any]
         self.didFinishEditing = didFinishEditing
         
-        let imageCropper = TOCropViewController(image: image)
-        imageCropper.delegate = self
+        let imageCropper = CropViewController(image: sourceImage)
+        imageCropper.onDidCropToRect = { [weak self] image, _, _ in
+            guard let strongSelf = self else { return }
+            
+            if let didFinishEditing = strongSelf.didFinishEditing {
+                if sourceImage != image {
+                    strongSelf.metadata?[kCGImagePropertyOrientation] = NSNumber(integerLiteral: 1)
+                }
+                                
+                didFinishEditing(image, strongSelf.metadata)
+                
+                strongSelf.didFinishEditing = nil
+                strongSelf.metadata = nil
+            }
+        }
+        imageCropper.modalPresentationStyle = .fullScreen
         
         self.imageEditor = imageCropper
         
         let imagePickerController = self.context.imagePickerController
-        (imagePickerController?.presentedViewController ?? imagePickerController)?.present(imageCropper, animated: true, completion: nil)
+        let presentedViewController = imagePickerController?.presentedViewController ?? imagePickerController
+        presentedViewController?.present(imageCropper, animated: true, completion: nil)
     }
 
     override open func finish() {
         self.imageEditor?.presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - TOCropViewControllerDelegate
-    
-    open func cropViewController(_ cropViewController: TOCropViewController, didCropToImage image: UIImage, rect cropRect: CGRect, angle: Int) {
-        if let didFinishEditing = self.didFinishEditing {
-            self.metadata?[kCGImagePropertyOrientation as AnyHashable] = NSNumber(integerLiteral: 0)
-            
-            didFinishEditing(image, self.metadata)
-            
-            self.didFinishEditing = nil
-            self.metadata = nil
-        }
     }
     
 }

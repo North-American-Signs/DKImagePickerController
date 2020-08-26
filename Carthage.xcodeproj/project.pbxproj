@@ -67,6 +67,8 @@
 			compilerSpec = com.apple.compilers.proxy.script;
 			filePatterns = "file.*";
 			fileType = pattern.proxy;
+			inputFiles = (
+			);
 			isEditable = 1;
 			outputFiles = (
 			);
@@ -143,13 +145,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9C90C070215F69A400314C91 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9CAD366C2003661E003E21C6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -338,8 +333,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C90C076215F69A400314C91 /* Build configuration list for PBXNativeTarget "DKImagePickerControllerBundle" */;
 			buildPhases = (
-				9C90C06F215F69A400314C91 /* Sources */,
-				9C90C070215F69A400314C91 /* Frameworks */,
 				9C90C071215F69A400314C91 /* Resources */,
 			);
 			buildRules = (
@@ -467,13 +460,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9C90C06F215F69A400314C91 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9CAD366B2003661E003E21C6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -531,7 +517,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DKImagePickerControllerBundle/Info.plist;
 				INSTALL_PATH = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -556,7 +542,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DKImagePickerControllerBundle/Info.plist;
 				INSTALL_PATH = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhangao0086.DKImagePickerControllerBundle;
@@ -698,7 +684,7 @@
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Vendors/CLImageEditor/CLImageEditor/**";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				MODULEMAP_FILE = "";
@@ -730,7 +716,7 @@
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Vendors/CLImageEditor/CLImageEditor/**";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				MODULEMAP_FILE = "";

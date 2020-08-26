@@ -85,7 +85,7 @@ public protocol DKImageAssetExporterObserver {
 }
 
 /*
- Configuration options for a DKImageAssetExporter.  When an exporter is created,
+ Configuration options for a DKImageAssetExporter. When an exporter is created,
  a copy of the configuration object is made - you cannot modify the configuration
  of an exporter after it has been created.
  */
@@ -172,7 +172,6 @@ open class DKImageAssetExporter: DKImageBaseManager {
             
             operation.completionBlock = nil
             
-            var success = true
             var exportedCount = 0
             
             let exportCompletionBlock: (DKAsset, Error?) -> Void = { asset, error in
@@ -195,7 +194,6 @@ open class DKImageAssetExporter: DKImageBaseManager {
                 }
                 
                 if let error = error as NSError? {
-                    success = false
                     asset.error = error
                     
                     asset.localTemporaryPath = nil
@@ -204,7 +202,6 @@ open class DKImageAssetExporter: DKImageBaseManager {
                         let attributes = try FileManager.default.attributesOfItem(atPath: asset.localTemporaryPath!.path)
                         asset.fileSize = (attributes[FileAttributeKey.size] as! NSNumber).uintValue
                     } catch let error as NSError {
-                        success = false
                         asset.error = error
                         
                         asset.localTemporaryPath = nil
@@ -313,7 +310,7 @@ open class DKImageAssetExporter: DKImageBaseManager {
     
     private func isHEIC(with imageData: Data) -> Bool {
         if imageData.count >= 12, let firstByte = imageData.first, firstByte == 0 {
-            let subdata = imageData.subdata(in: Range(4..<12))
+            let subdata = imageData.subdata(in: 4..<12)
             let str = String(data: subdata, encoding: .ascii)
             return str == "ftypheic" || str == "ftypheix" || str == "ftyphevc" || str == "ftyphevx"
         } else {
@@ -392,7 +389,7 @@ open class DKImageAssetExporter: DKImageBaseManager {
             try fileManager.removeItem(at: auxiliaryDirectory)
         }
         
-        if let _ = asset.originalAsset {
+        if let originalAsset = asset.originalAsset {
             autoreleasepool {
                 let options = PHImageRequestOptions()
                 options.version = .current
@@ -412,26 +409,41 @@ open class DKImageAssetExporter: DKImageBaseManager {
                         }
                         
                         if var imageData = data {
-                            if let info = info, let fileURL = info["PHImageFileURLKey"] as? NSURL {
-                                asset.fileName = fileURL.lastPathComponent ?? "Image"
-                            } else {
-                                asset.fileName = "Image.jpg"
+                            if #available(iOS 9, *) {
+                                var resource: PHAssetResource? = nil
+                                for assetResource in PHAssetResource.assetResources(for: originalAsset) {
+                                    if assetResource.type == .photo {
+                                        resource = assetResource
+                                        break
+                                    }
+                                }
+                                if let resource = resource {
+                                    asset.fileName = resource.originalFilename
+                                }
+                            }
+                            
+                            if asset.fileName == nil {
+                                if let info = info, let fileURL = info["PHImageFileURLKey"] as? NSURL {
+                                    asset.fileName = fileURL.lastPathComponent ?? "Image"
+                                } else {
+                                    asset.fileName = "Image.jpg"
+                                }
+                            }
+                                                                                    
+                            if self.configuration.imageExportPreset == .compatible && self.isHEIC(with: imageData) {
+                                if let fileName = asset.fileName, let jpgData = self.imageToJPEG(with: imageData) {
+                                    imageData = jpgData
+                                    
+                                    if fileName.uppercased().hasSuffix(".HEIC") {
+                                        asset.fileName = fileName.dropLast(4) + "jpg"
+                                    }
+                                }
                             }
                             
                             asset.localTemporaryPath = asset.localTemporaryPath?.appendingPathComponent(asset.fileName!)
                             
                             if FileManager.default.fileExists(atPath: asset.localTemporaryPath!.path) {
                                 return completion(nil)
-                            }
-                            
-                            if  self.configuration.imageExportPreset == .compatible && self.isHEIC(with: imageData) {
-                                if let jpgData = self.imageToJPEG(with: imageData) {
-                                    imageData = jpgData
-                                    
-                                    if asset.fileName!.uppercased().hasSuffix(".HEIC") {
-                                        asset.fileName = asset.fileName!.dropLast(4) + "jpg"
-                                    }
-                                }
                             }
                             
                             do {

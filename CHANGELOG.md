@@ -1,5 +1,65 @@
 # Change Log
 
+## [4.3.1](https://github.com/zhangao0086/DKImagePickerController/tree/4.3.1) (2020-05-16)
+
+- Fixed an issue that caused Carthage was broken.
+- DKImageExtensionController can control whether to disable an specfic extension. 
+
+## [4.3.0](https://github.com/zhangao0086/DKImagePickerController/tree/4.3.0) (2020-04-27)
+
+- Drop support for iOS 8
+
+## [4.2.1](https://github.com/zhangao0086/DKImagePickerController/tree/4.2.1) (2019-11-08)
+
+- Fixed #632
+- Fixed #629
+- Fixed #630
+
+## [4.2.0](https://github.com/zhangao0086/DKImagePickerController/tree/4.2.0) (2019-10-14)
+
+- Dark Mode Support
+- Add scroll:to:indexPath:
+- Fixed #553 #620
+- Fixed #597
+
+## [4.1.3](https://github.com/zhangao0086/DKImagePickerController/tree/4.1.3) (2019-02-26)
+
+- Avoiding force unwrapping.
+
+- Add `.smartAlbumUserLibrary` conditions into reload logic to avoid huge amount of `collectionView.reloadData()` calling while users have a large amount of groups in their albums.
+
+- Allow customization of asset group list cells and presentation style.
+
+- Allow customization of detail list title view.
+
+## [4.1.2](https://github.com/zhangao0086/DKImagePickerController/tree/4.1.2) (2018-12-23)
+
+- Fixed an issue that caused the callback did not invoke.
+
+## [4.1.1](https://github.com/zhangao0086/DKImagePickerController/tree/4.1.1) (2018-12-22)
+
+- Allow "Select All".
+
+- Fixed #552.
+
+- Fixed #554.
+
+- Fixed a crash caused by performBatchUpdates.
+
+- Updated the version of used TOCropViewController to ~> 2.4.
+
+- The ability to hide cropping feature.
+
+## [4.1.0](https://github.com/zhangao0086/DKImagePickerController/tree/4.1.0) (2018-11-19)
+
+- Can reload with a new configuration.
+
+- Added support for GPS metadata.
+
+- Replace CLImageEditor with TOCropViewController.
+
+- Fixed memory leaks.
+
 ## [4.0.3](https://github.com/zhangao0086/DKImagePickerController/tree/4.0.3) (2017-09-24)
 
 - Carthage.
