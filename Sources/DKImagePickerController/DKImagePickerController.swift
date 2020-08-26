@@ -109,6 +109,20 @@ open class DKImagePickerController: UINavigationController, DKImageBaseManagerOb
     @objc public var exportsWhenCompleted = false
     
     @objc public var exporter: DKImageAssetExporter?
+
+    /// The predicate applies to images only.
+    public var imageFetchPredicate: NSPredicate? {
+        didSet {
+            getImageDataManager().grou
+        }
+    }
+
+    /// The predicate applies to videos only.
+    public var videoFetchPredicate: NSPredicate? {
+        didSet {
+            getImageManager().groupDataManager.assetFetchOptions = self.createAssetFetchOptions()
+        }
+    }
     
     /// Indicates the status of the exporter.
     @objc public private(set) var exportStatus = DKImagePickerControllerExportStatus.none {
@@ -379,7 +393,11 @@ open class DKImagePickerController: UINavigationController, DKImageBaseManagerOb
     private func createDefaultAssetFetchOptions() -> PHFetchOptions {
         let createImagePredicate = { () -> NSPredicate in
             let imagePredicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
-            
+
+            if let imageFetchPredicate = self.imageFetchPredicate {
+                imagePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [imagePredicate, imageFetchPredicate])
+            }
+
             return imagePredicate
         }
         
